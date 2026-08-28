@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Modern responsive calculator built with HTML, CSS and JavaScript"
+    >
+
+    <title>Nova Calculator</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="app">
+
+        <!-- Calculator -->
+        <section class="calculator">
+
+            <!-- Top Bar -->
+            <div class="top-bar">
+
+                <div class="calculator-title">
+                    <span class="status-dot"></span>
+                    <span>Nova Calculator</span>
+                </div>
+
+                <div class="top-actions">
+
+                    <button
+                        id="history-btn"
+                        class="icon-btn"
+                        aria-label="Open calculation history"
+                        title="History"
+                    >
+                        ◷
+                    </button>
+
+                    <button
+                        id="theme-btn"
+                        class="icon-btn"
+                        aria-label="Toggle theme"
+                        title="Toggle theme"
+                    >
+                        ☀
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Display -->
+            <div class="display">
+
+                <div
+                    class="expression"
+                    id="expression"
+                    aria-live="polite"
+                ></div>
+
+                <div
+                    class="result"
+                    id="result"
+                    aria-live="polite"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <!-- Calculator Buttons -->
+            <div class="buttons">
+
+                <button
+                    class="function"
+                    data-action="clear"
+                >
+                    AC
+                </button>
+
+                <button
+                    class="function"
+                    data-action="delete"
+                >
+                    ⌫
+                </button>
+
+                <button
+                    class="function"
+                    data-action="percent"
+                >
+                    %
+                </button>
+
+                <button
+                    class="operator"
+                    data-operation="/"
+                >
+                    ÷
+                </button>
+
+
+                <button data-number="7">7</button>
+                <button data-number="8">8</button>
+                <button data-number="9">9</button>
+
+                <button
+                    class="operator"
+                    data-operation="*"
+                >
+                    ×
+                </button>
+
+
+                <button data-number="4">4</button>
+                <button data-number="5">5</button>
+                <button data-number="6">6</button>
+
+                <button
+                    class="operator"
+                    data-operation="-"
+                >
+                    −
+                </button>
+
+
+                <button data-number="1">1</button>
+                <button data-number="2">2</button>
+                <button data-number="3">3</button>
+
+                <button
+                    class="operator"
+                    data-operation="+"
+                >
+                    +
+                </button>
+
+
+                <button
+                    class="function"
+                    data-action="sign"
+                >
+                    ±
+                </button>
+
+                <button
+                    class="zero"
+                    data-number="0"
+                >
+                    0
+                </button>
+
+                <button data-number=".">.</button>
+
+                <button
+                    class="equals"
+                    data-action="equals"
+                >
+                    =
+                </button>
+
+            </div>
+
+
+            <!-- Keyboard Hint -->
+            <div class="keyboard-hint">
+
+                <span class="keyboard-icon">⌨</span>
+
+                <span>Keyboard supported</span>
+
+                <span class="key">Enter</span>
+                <span class="key">Backspace</span>
+                <span class="key">Esc</span>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- History Overlay -->
+    <div
+        id="history-overlay"
+        class="history-overlay"
+        aria-hidden="true"
+    >
+
+        <aside
+            class="history-panel"
+            aria-label="Calculation history"
+        >
+
+            <!-- History Header -->
+            <div class="history-header">
+
+                <div class="history-title">
+
+                    <span class="history-icon">◷</span>
+
+                    <h2>Calculation History</h2>
+
+                </div>
+
+                <button
+                    id="close-history"
+                    class="close-btn"
+                    aria-label="Close history"
+                    title="Close"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <!-- History Items -->
+            <div
+                id="history-list"
+                class="history-list"
+            >
+
+                <div class="empty-history">
+
+                    <div class="empty-icon">
+                        ◷
+                    </div>
+
+                    <p>No calculations yet</p>
+
+                    <span>
+                        Your calculations will appear here
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Clear History -->
+            <button
+                id="clear-history"
+                class="clear-history-btn"
+            >
+                Clear History
+            </button>
+
+        </aside>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

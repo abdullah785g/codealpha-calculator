@@ -1,0 +1,819 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #080b14;
+    --card: rgba(18, 23, 38, 0.92);
+    --display: #050812;
+
+    --button: #1a2032;
+    --button-hover: #252d44;
+
+    --text: #f8fafc;
+    --muted: #7d879c;
+
+    --border: rgba(255, 255, 255, 0.07);
+
+    --operator: #5146e5;
+    --operator-hover: #6358f0;
+
+    --function: #293146;
+
+    --equal: #10b981;
+    --equal-hover: #18c995;
+
+    --danger: #ef4444;
+}
+
+
+/* =========================
+   LIGHT THEME
+========================= */
+
+body.light {
+    --bg: #eef2ff;
+    --card: rgba(255, 255, 255, 0.94);
+    --display: #f8fafc;
+
+    --button: #e8edf7;
+    --button-hover: #dce3f1;
+
+    --text: #111827;
+    --muted: #64748b;
+
+    --border: rgba(15, 23, 42, 0.08);
+
+    --function: #dce3f1;
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 25px;
+
+    font-family: "Inter", sans-serif;
+
+    color: var(--text);
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(81, 70, 229, 0.22),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(16, 185, 129, 0.12),
+            transparent 30%
+        ),
+        var(--bg);
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   MAIN APP
+========================= */
+
+.app {
+    width: min(430px, 100%);
+}
+
+
+/* =========================
+   CALCULATOR
+========================= */
+
+.calculator {
+    width: 100%;
+
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 28px;
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.4);
+
+    overflow: hidden;
+}
+
+
+/* =========================
+   TOP BAR
+========================= */
+
+.top-bar {
+    height: 65px;
+
+    padding: 0 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.calculator-title {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    color: var(--muted);
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: var(--equal);
+
+    box-shadow:
+        0 0 12px rgba(16, 185, 129, 0.8);
+}
+
+
+/* =========================
+   TOP ACTIONS
+========================= */
+
+.top-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+.icon-btn {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid var(--border);
+
+    border-radius: 11px;
+
+    background: var(--button);
+
+    color: var(--text);
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.icon-btn:hover {
+    background: var(--button-hover);
+
+    transform: translateY(-2px);
+}
+
+#theme-btn:hover {
+    transform: rotate(20deg);
+}
+
+
+/* =========================
+   DISPLAY
+========================= */
+
+.display {
+    min-height: 150px;
+
+    margin: 18px;
+
+    padding: 22px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-end;
+    align-items: flex-end;
+
+    background: var(--display);
+
+    border: 1px solid var(--border);
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+.expression {
+    width: 100%;
+
+    min-height: 25px;
+
+    color: var(--muted);
+
+    font-size: 15px;
+
+    text-align: right;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+.result {
+    width: 100%;
+
+    margin-top: 5px;
+
+    color: var(--text);
+
+    font-size: clamp(38px, 10vw, 54px);
+
+    font-weight: 700;
+
+    line-height: 1.1;
+
+    letter-spacing: -2px;
+
+    text-align: right;
+
+    white-space: nowrap;
+
+    overflow-x: auto;
+
+    scrollbar-width: none;
+}
+
+.result::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* =========================
+   BUTTON GRID
+========================= */
+
+.buttons {
+    padding: 0 18px 18px;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 10px;
+}
+
+.buttons button {
+    height: 65px;
+
+    border: none;
+
+    border-radius: 16px;
+
+    background: var(--button);
+
+    color: var(--text);
+
+    font-family: inherit;
+
+    font-size: 20px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.12s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.buttons button:hover {
+    background: var(--button-hover);
+
+    transform: translateY(-2px);
+}
+
+.buttons button:active {
+    transform: scale(0.94);
+}
+
+
+/* =========================
+   FUNCTION BUTTONS
+========================= */
+
+.buttons .function {
+    background: var(--function);
+
+    color: var(--muted);
+}
+
+.buttons .function:hover {
+    color: var(--text);
+}
+
+
+/* =========================
+   OPERATORS
+========================= */
+
+.buttons .operator {
+    background: var(--operator);
+
+    color: white;
+
+    box-shadow:
+        0 8px 20px rgba(81, 70, 229, 0.2);
+}
+
+.buttons .operator:hover {
+    background: var(--operator-hover);
+}
+
+
+/* =========================
+   EQUAL BUTTON
+========================= */
+
+.buttons .equals {
+    background: var(--equal);
+
+    color: white;
+
+    box-shadow:
+        0 8px 20px rgba(16, 185, 129, 0.2);
+}
+
+.buttons .equals:hover {
+    background: var(--equal-hover);
+}
+
+
+/* =========================
+   ZERO
+========================= */
+
+.zero {
+    grid-column: span 1;
+}
+
+
+/* =========================
+   KEYBOARD HINT
+========================= */
+
+.keyboard-hint {
+    min-height: 48px;
+
+    padding: 0 18px 16px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+}
+
+.keyboard-icon {
+    font-size: 14px;
+}
+
+.key {
+    padding: 4px 7px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 6px;
+
+    background: var(--button);
+
+    font-size: 9px;
+}
+
+
+/* ==================================================
+   HISTORY OVERLAY
+================================================== */
+
+.history-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    background: rgba(0, 0, 0, 0.5);
+
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease;
+}
+
+
+/* =========================
+   OPEN HISTORY
+========================= */
+
+.history-overlay.active {
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+}
+
+
+/* =========================
+   HISTORY PANEL
+========================= */
+
+.history-panel {
+    width: min(390px, 90vw);
+
+    height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    background: var(--card);
+
+    border-left: 1px solid var(--border);
+
+    border-radius: 25px 0 0 25px;
+
+    box-shadow:
+        -20px 0 60px rgba(0, 0, 0, 0.35);
+
+    transform: translateX(100%);
+
+    transition:
+        transform 0.3s ease;
+}
+
+.history-overlay.active .history-panel {
+    transform: translateX(0);
+}
+
+
+/* =========================
+   HISTORY HEADER
+========================= */
+
+.history-header {
+    min-height: 70px;
+
+    padding: 0 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.history-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.history-icon {
+    color: var(--operator);
+
+    font-size: 20px;
+}
+
+.history-title h2 {
+    font-size: 16px;
+
+    font-weight: 600;
+}
+
+
+/* =========================
+   CLOSE BUTTON
+========================= */
+
+.close-btn {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    background: var(--button);
+
+    color: var(--text);
+
+    font-size: 25px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.close-btn:hover {
+    background: var(--button-hover);
+
+    transform: rotate(90deg);
+}
+
+
+/* =========================
+   HISTORY LIST
+========================= */
+
+.history-list {
+    flex: 1;
+
+    padding: 15px;
+
+    overflow-y: auto;
+}
+
+.history-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.history-list::-webkit-scrollbar-thumb {
+    background: var(--button-hover);
+
+    border-radius: 10px;
+}
+
+
+/* =========================
+   HISTORY ITEM
+========================= */
+
+.history-item {
+    padding: 15px;
+
+    margin-bottom: 9px;
+
+    border-radius: 14px;
+
+    background: var(--button);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.history-item:hover {
+    background: var(--button-hover);
+
+    transform: translateX(-3px);
+}
+
+.history-expression {
+    margin-bottom: 6px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+.history-result {
+    color: var(--text);
+
+    font-size: 19px;
+
+    font-weight: 600;
+}
+
+
+/* =========================
+   EMPTY HISTORY
+========================= */
+
+.empty-history {
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    color: var(--muted);
+}
+
+.empty-icon {
+    width: 60px;
+    height: 60px;
+
+    margin-bottom: 15px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background: var(--button);
+
+    font-size: 25px;
+}
+
+.empty-history p {
+    margin-bottom: 5px;
+
+    color: var(--text);
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+.empty-history span {
+    font-size: 11px;
+}
+
+
+/* =========================
+   CLEAR HISTORY
+========================= */
+
+.clear-history-btn {
+    margin: 15px;
+
+    padding: 13px;
+
+    border: 1px solid rgba(239, 68, 68, 0.2);
+
+    border-radius: 12px;
+
+    background: rgba(239, 68, 68, 0.08);
+
+    color: var(--danger);
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.clear-history-btn:hover {
+    background: rgba(239, 68, 68, 0.15);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 500px) {
+
+    body {
+        padding: 12px;
+    }
+
+    .calculator {
+        border-radius: 23px;
+    }
+
+    .display {
+        margin: 13px;
+
+        min-height: 135px;
+
+        padding: 18px;
+    }
+
+    .buttons {
+        padding: 0 13px 13px;
+
+        gap: 7px;
+    }
+
+    .buttons button {
+        height: 60px;
+
+        border-radius: 14px;
+
+        font-size: 18px;
+    }
+
+    .keyboard-hint {
+        padding-bottom: 13px;
+    }
+
+    .history-panel {
+        width: 92vw;
+
+        border-radius: 22px 0 0 22px;
+    }
+}
+
+
+/* =========================
+   SMALL SCREENS
+========================= */
+
+@media (max-width: 350px) {
+
+    .top-bar {
+        padding: 0 14px;
+    }
+
+    .display {
+        min-height: 120px;
+
+        padding: 15px;
+    }
+
+    .buttons button {
+        height: 54px;
+
+        font-size: 17px;
+    }
+
+    .key {
+        display: none;
+    }
+}
